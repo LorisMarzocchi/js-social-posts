@@ -86,7 +86,8 @@ for (let i = 0; i < posts.length; i++) {
       imgUser = `<img class="profile-pic" src="${posts[i].author.image}" alt=""></img>`;
 
     } else {
-      const iniziali = posts[i].author.name.split(" ").map((e) => e[0]).join("").toUpperCase;
+      const iniziali = posts[i].author.name.split(" ").map((e) => e[0]).join("").toUpperCase();
+   
 
       imgUser = `<div class="profile-pic">${iniziali}</div>`;
     }
@@ -142,6 +143,7 @@ for (let i = 0; i < btnLike.length; i++) {
 
         if (buttonLike.classList.contains("like-button--liked")) {
             posts[i].likes -= 1;
+            arrVuoto.pop(posts[i].id);
         }
 
         else{
