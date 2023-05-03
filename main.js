@@ -73,17 +73,7 @@ const posts = [
 ];
 
 const containerPost = document.querySelector(".posts-list");
-// for (let i = 0; i < posts.length; i++) {
-    
-    //     let a = document.querySelector(".post-meta__icon");
-    //     let iniziali = '';
-    //     if (posts[i].author.image) {
-        //       a.innerHTML += `<img class="profile-pic" src="${posts[i].author.image}" alt=""></img>`;
-        //     } else {
-            //       iniziali = posts[i].author.name.split(" ").map((e) => e[0]).join("");
-            //       a.innerHTML += `<img class="profile-pic" src="" alt="${iniziali}"></img>`;
-            
-//     }
+
 for (let i = 0; i < posts.length; i++) {
 
     const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
