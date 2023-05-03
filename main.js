@@ -75,8 +75,7 @@ const containerPost = document.querySelector(".posts-list");
 for (let i = 0; i < posts.length; i++) {
     let iniziali = '';
     if (posts[i].author.image == null) {
-        iniziali = posts[i].author.name.charAt(0);
-        posts[i].author.image = iniziali;
+        iniziali = posts[i].author.name.split(" ").map((e)=>e[0]).join("");
     }
     containerPost.innerHTML += 
     `<div class="post">
@@ -110,5 +109,7 @@ for (let i = 0; i < posts.length; i++) {
         </div>            
     </div>`
 };
+
+
 
 
