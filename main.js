@@ -12,6 +12,8 @@ BONUS
 */
 
 
+
+
 const posts = [
     {
         "id": 1,
@@ -71,22 +73,47 @@ const posts = [
 ];
 
 const containerPost = document.querySelector(".posts-list");
-
+// for (let i = 0; i < posts.length; i++) {
+    
+    //     let a = document.querySelector(".post-meta__icon");
+    //     let iniziali = '';
+    //     if (posts[i].author.image) {
+        //       a.innerHTML += `<img class="profile-pic" src="${posts[i].author.image}" alt=""></img>`;
+        //     } else {
+            //       iniziali = posts[i].author.name.split(" ").map((e) => e[0]).join("");
+            //       a.innerHTML += `<img class="profile-pic" src="" alt="${iniziali}"></img>`;
+            
+//     }
 for (let i = 0; i < posts.length; i++) {
-    let iniziali = '';
-    if (posts[i].author.image == null) {
-        iniziali = posts[i].author.name.split(" ").map((e)=>e[0]).join("");
+
+    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+    const data = new Date(posts[i].created)
+    const dataFormattata = data.toLocaleDateString('it-IT', options);
+
+    let imgUser = '';
+
+    if (posts[i].author.image) {
+      imgUser = `<img class="profile-pic" src="${posts[i].author.image}" alt=""></img>`;
+
+    } else {
+      const iniziali = posts[i].author.name.split(" ").map((e) => e[0]).join("").toUpperCase;
+
+      imgUser = `<div class="profile-pic">${iniziali}</div>`;
     }
+  
+
+
+
     containerPost.innerHTML += 
     `<div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src=${posts[i].author.image} alt="${iniziali}">                    
+                ${imgUser}                  
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${posts[i].author.name}</div>
-                    <div class="post-meta__time">${posts[i].created}</div>
+                    <div class="post-meta__time">${dataFormattata}</div>
                 </div>                    
             </div>
         </div>
@@ -97,7 +124,7 @@ for (let i = 0; i < posts.length; i++) {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" href="javascript:void(0);" data-postid="1">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -108,8 +135,34 @@ for (let i = 0; i < posts.length; i++) {
             </div> 
         </div>            
     </div>`
+
+ 
 };
 
 
+let arrVuoto = [];
+const btnLike = document.querySelectorAll(".like-button");
+const likeCount = document.querySelectorAll(".js-likes-counter")
 
+for (let i = 0; i < btnLike.length; i++) {
+    const buttonLike = btnLike[i];
+    const counterLike = likeCount[i];
 
+    buttonLike.addEventListener('click', function(){
+
+        if (buttonLike.classList.contains("like-button--liked")) {
+            posts[i].likes -= 1;
+        }
+
+        else{
+
+            posts[i].likes += 1;
+            arrVuoto.push(posts[i].id);
+            console.log(arrVuoto);
+        }
+
+        buttonLike.classList.toggle("like-button--liked");
+        counterLike.innerHTML = posts[i].likes;
+    });
+    
+};
