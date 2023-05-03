@@ -71,25 +71,29 @@ const posts = [
 ];
 
 const containerPost = document.querySelector(".posts-list");
-// let post = "";
 
 for (let i = 0; i < posts.length; i++) {
+    let iniziali = '';
+    if (posts[i].author.image == null) {
+        iniziali = posts[i].author.name.charAt(0);
+        posts[i].author.image = iniziali;
+    }
     containerPost.innerHTML += 
     `<div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src=${posts.author.image} alt="Phil Mangione">                    
+                    <img class="profile-pic" src=${posts[i].author.image} alt="${iniziali}">                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${posts.author.name}</div>
-                    <div class="post-meta__time">${posts.created}</div>
+                    <div class="post-meta__author">${posts[i].author.name}</div>
+                    <div class="post-meta__time">${posts[i].created}</div>
                 </div>                    
             </div>
         </div>
-        <div class="post__text">${posts.content}</div>
+        <div class="post__text">${posts[i].content}</div>
         <div class="post__image">
-            <img src="${posts.media}" alt="">
+            <img src="${posts[i].media}" alt="">
         </div>
         <div class="post__footer">
             <div class="likes js-likes">
@@ -100,11 +104,11 @@ for (let i = 0; i < posts.length; i++) {
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts.likes}</b> persone
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
                 </div>
             </div> 
         </div>            
     </div>`
 };
-containerPost.innerHTML = posts;
+
 
