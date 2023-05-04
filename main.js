@@ -89,7 +89,7 @@ for (let i = 0; i < posts.length; i++) {
       const iniziali = posts[i].author.name.split(" ").map((e) => e[0]).join("").toUpperCase();
    
 
-      imgUser = `<div class="profile-pic">${iniziali}</div>`;
+      imgUser = `<img class="profile-pic">${iniziali}</img>`;
     }
   
 
@@ -116,7 +116,7 @@ for (let i = 0; i < posts.length; i++) {
             <div class="likes js-likes">
                 <div class="likes__cta">
                     <a class="like-button  js-like-button" href="javascript:void(0);" data-postid="1">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                       <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
