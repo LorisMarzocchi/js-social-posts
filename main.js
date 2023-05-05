@@ -76,9 +76,11 @@ const containerPost = document.querySelector(".posts-list");
 
 for (let i = 0; i < posts.length; i++) {
 
-    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-    const data = new Date(posts[i].created)
-    const dataFormattata = data.toLocaleDateString('it-IT', options);
+    // const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+    // const data = new Date(posts[i].created)
+    // const dataFormattata = data.toLocaleDateString('it-IT', options);
+    const dataFormattata = posts[i].created.split("-").reverse().join("-") ;
+
 
     let imgUser = '';
 
@@ -115,13 +117,13 @@ for (let i = 0; i < posts.length; i++) {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="javascript:void(0);" data-postid="1">
+                    <a class="like-button  js-like-button" href="javascript:void(0);" data-postid="${posts[i].id}">
                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+                    Piace a <b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b> persone
                 </div>
             </div> 
         </div>            
@@ -131,7 +133,7 @@ for (let i = 0; i < posts.length; i++) {
 };
 
 
-let arrVuoto = [];
+let arrID = [];
 const btnLike = document.querySelectorAll(".like-button");
 const likeCount = document.querySelectorAll(".js-likes-counter")
 
@@ -143,18 +145,30 @@ for (let i = 0; i < btnLike.length; i++) {
 
         if (buttonLike.classList.contains("like-button--liked")) {
             posts[i].likes -= 1;
-            arrVuoto.pop(posts[i].id);
+            // arrID.pop();
+            console.log(arrID);
+            remove(arrID, posts[i].id);
         }
 
         else{
 
             posts[i].likes += 1;
-            arrVuoto.push(posts[i].id);
-            console.log(arrVuoto);
+            arrID.push(posts[i].id);
         }
-
+        
         buttonLike.classList.toggle("like-button--liked");
         counterLike.innerHTML = posts[i].likes;
+        console.log(arrID);
     });
     
 };
+function remove(arrID, id) {
+    for (let j = 0; j < arrID.length; j++) {
+        if (arrID[j] === id) {
+            arrID.splice(j, 1);
+        }
+    }
+    // console.log(arrID);
+
+};
+// console.log(arrID);
